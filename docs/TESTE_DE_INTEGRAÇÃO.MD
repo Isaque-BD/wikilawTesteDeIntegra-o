@@ -14,7 +14,6 @@ No nosso projeto, isso normalmente significa: subir o contexto real da aplicaç�
 |---|---|---|
 | **Unitário** | Uma unidade de lógica isolada (uma classe, um método) | Dependências mockadas |
 | **Integração** | A interação real entre componentes internos (Controller → Service → Repository → Banco) | Banco real ou equivalente; sem mocks das camadas internas |
-| **End-to-End (E2E)** | O sistema completo, geralmente incluindo frontend/UI | Nenhum — ambiente o mais próximo possível de produção |
 
 Um teste de integração não existe para provar que uma classe está certa isoladamente — existe pra provar que a **fronteira** entre componentes (ex.: a query gerada pelo Specification realmente traz o resultado certo do banco) funciona como esperado. Por isso, ao planejar um teste de integração, a primeira pergunta é sempre: **qual fronteira entre componentes estou validando aqui?**, não "qual classe estou testando?".
 
