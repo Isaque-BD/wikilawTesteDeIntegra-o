@@ -1,13 +1,9 @@
 # Testes de Integração com BDD — Metodologia e Padrão de Implementação
-
-> Documento de referência da equipe. Explica o que é teste de integração, como o BDD é usado como critério de aceite, o fluxo de trabalho ponta a ponta, os cenários já definidos para a Sprint 1 e como tudo isso se traduz em código.
-
 ---
 
 ## 1. O que é um teste de integração
 
-Um teste de integração valida se **dois ou mais componentes reais do sistema funcionam corretamente quando conectados entre si** — ao contrário do teste unitário (que isola uma classe/método, normalmente com dependências mockadas) e do teste end-to-end (que valida o sistema inteiro, geralmente incluindo a interface do usuário, de ponta a ponta).
-
+Um teste de integração valida se **dois ou mais componentes reais do sistema funcionam corretamente quando conectados entre si** — ao contrário do teste unitário (que isola uma classe/método, normalmente com dependências mockadas).
 No nosso projeto, isso normalmente significa: subir o contexto real da aplicação Spring, fazer uma chamada HTTP de verdade contra um controller (via MockMvc), deixar essa chamada atravessar o service, a camada de consulta (Specification/JPA Criteria) e chegar a um banco de dados real — e então verificar a resposta.
 
 | Tipo de teste | O que valida | Isolamento |
