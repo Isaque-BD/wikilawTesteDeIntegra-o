@@ -295,6 +295,179 @@ When: a busca for executada
 Then: o sistema retorna lista vazia com total = 0, sem erro
 ```
 
+## Cenários BDD — Sprint 2
+
+### US11 — Visualizar dashboard com os indicadores da pesquisa
+
+```text
+Cenário: indicadores principais
+Given: o usuário realizou uma pesquisa e possui resultados disponíveis
+When: o usuário acessar o dashboard da pesquisa
+Then: o sistema apresenta os indicadores de Aderência (%) e Total de Processos/decisões analisados
+
+Cenário: distribuição do mérito
+Given: os resultados possuem informações sobre o mérito das decisões
+When: o usuário visualizar o dashboard
+Then: o sistema apresenta um gráfico de rosca/pizza com a distribuição entre provido e desprovido, ou procedente e improcedente
+
+Cenário: distribuição por Câmaras/Turmas
+Given: os resultados possuem informações sobre a Câmara ou Turma responsável pelo julgamento
+When: o usuário visualizar o dashboard
+Then: o sistema apresenta um gráfico de barras com o volume e a distribuição dos resultados por Câmara/Turma
+
+Cenário: evolução temporal
+Given: existem resultados relacionados à tese pesquisada em diferentes períodos
+When: o usuário visualizar o dashboard
+Then: o sistema apresenta uma linha temporal com a evolução do entendimento sobre a tese ao longo do tempo
+
+Cenário: dados referentes à pesquisa ativa
+Given: o usuário realizou uma pesquisa ou possui um caso ativo
+When: o usuário acessar o dashboard
+Then: os indicadores e gráficos consideram apenas os resultados relacionados à pesquisa ou ao caso ativo
+```
+
+### US12 — Interagir com o dashboard para filtrar indicadores e resultados dinamicamente
+
+```text
+Cenário: aplicação de filtro pelo gráfico
+Given: o usuário está visualizando o dashboard
+When: o usuário selecionar um elemento de um gráfico, como uma Câmara/Turma ou uma categoria de mérito
+Then: o sistema aplica o filtro correspondente aos dados apresentados
+
+Cenário: atualização do dashboard
+Given: o usuário aplicou um filtro por meio de um elemento do dashboard
+When: o filtro for aplicado
+Then: os indicadores e gráficos são atualizados de acordo com a seleção realizada
+
+Cenário: atualização dos resultados
+Given: existe um filtro ativo no dashboard
+When: o usuário visualizar a lista de resultados
+Then: o sistema apresenta apenas os processos correspondentes ao filtro selecionado
+
+Cenário: remoção do filtro
+Given: o usuário possui um ou mais filtros aplicados
+When: o usuário remover os filtros
+Then: o dashboard e a lista de resultados retornam à visualização completa da pesquisa
+```
+
+### US13 — Comparar os dados do caso com o panorama geral do tribunal
+
+```text
+Cenário: alternância de visualização
+Given: o usuário está visualizando o dashboard da sua pesquisa
+When: o usuário selecionar a opção de panorama geral do tribunal
+Then: o sistema apresenta os dados gerais disponíveis do tribunal para comparação
+
+Cenário: retorno à pesquisa atual
+Given: o usuário está visualizando o panorama geral do tribunal
+When: o usuário selecionar a visualização do seu caso/pesquisa
+Then: o sistema volta a apresentar os indicadores relacionados à pesquisa ativa
+
+Cenário: identificação do escopo
+Given: o usuário alternou entre os dados da pesquisa e o panorama geral
+When: os indicadores forem apresentados
+Then: o sistema indica claramente qual conjunto de dados está sendo visualizado
+```
+
+### US14 — Encontrar conteúdos juridicamente semelhantes por interpretação do contexto do caso
+
+```text
+Cenário: interpretação semântica
+Given: o usuário informou a descrição de um caso
+When: o usuário realizar uma busca com auxílio da IA
+Then: o sistema considera o significado e o contexto do caso, e não apenas correspondências exatas de palavras-chave
+
+Cenário: elementos considerados
+Given: a descrição do caso contém informações sobre fatos, fundamentos jurídicos e pedidos
+When: a IA processar a pesquisa
+Then: esses elementos são considerados na identificação dos conteúdos mais semelhantes
+
+Cenário: recuperação de conteúdos semanticamente relacionados
+Given: existem conteúdos juridicamente relacionados ao caso, mas escritos com termos diferentes
+When: a busca semântica for realizada
+Then: o sistema inclui esses conteúdos entre os resultados com base na similaridade de contexto
+```
+
+### US15 — Visualizar resultados ordenados por similaridade, com percentual e justificativa
+
+```text
+Cenário: ordenação por similaridade
+Given: a busca por similaridade retornou múltiplos resultados
+When: os resultados forem apresentados
+Then: eles são ordenados do maior para o menor grau de similaridade com o caso pesquisado
+
+Cenário: percentual de similaridade
+Given: um resultado foi identificado pela busca semântica
+When: o resultado for apresentado ao usuário
+Then: o sistema exibe seu percentual de similaridade com o caso pesquisado
+
+Cenário: justificativa da similaridade
+Given: um resultado foi considerado semelhante ao caso pesquisado
+When: o usuário visualizar esse resultado
+Then: o sistema apresenta uma justificativa resumida, por meio de trecho ou tags, indicando os principais elementos responsáveis pela similaridade
+
+Cenário: baixa aderência
+Given: um resultado possui similaridade inferior a 50%
+When: o resultado for apresentado na lista de resultados
+Then: o sistema o mantém disponível e o identifica visualmente como resultado de baixa aderência
+```
+
+### US16 — Enviar documentos PDF ou DOCX relacionados ao caso
+
+```text
+Cenário: formatos aceitos
+Given: o usuário deseja complementar as informações do seu caso
+When: o usuário selecionar um arquivo nos formatos PDF ou DOCX
+Then: o sistema permite o envio do documento
+
+Cenário: formato não suportado
+Given: o usuário selecionou um arquivo em formato diferente de PDF ou DOCX
+When: o usuário tentar realizar o envio
+Then: o sistema informa que o formato não é suportado e não processa o arquivo
+
+Cenário: utilização do documento
+Given: um documento válido foi enviado e processado
+When: o usuário realizar a busca por similaridade
+Then: as informações extraídas do documento podem ser utilizadas como contexto adicional da pesquisa
+```
+
+### US17 — Visualizar fatos e teses identificados pela IA nos documentos enviados
+
+```text
+Cenário: extração das informações
+Given: o usuário enviou um documento válido
+When: o documento for processado pela IA
+Then: o sistema identifica e apresenta os principais fatos e teses encontrados no conteúdo
+
+Cenário: visualização antes da pesquisa
+Given: a IA concluiu a extração dos fatos e teses
+When: o processamento do documento for finalizado
+Then: o sistema apresenta ao usuário um resumo dos pontos identificados antes da execução da busca por similaridade
+
+Cenário: utilização na busca
+Given: fatos e teses foram identificados no documento
+When: o usuário iniciar a busca por similaridade
+Then: o sistema considera essas informações como contexto para a pesquisa
+```
+
+### US18 — Exportar em PDF os resultados e informações da pesquisa
+
+```text
+Cenário: geração do PDF
+Given: o usuário possui uma pesquisa com resultados disponíveis
+When: o usuário selecionar a opção de exportação
+Then: o sistema gera um arquivo no formato PDF contendo as informações da pesquisa
+
+Cenário: conteúdo exportado
+Given: o usuário solicitou a exportação da pesquisa
+When: o PDF for gerado
+Then: o documento apresenta os principais dados da pesquisa e os resultados encontrados
+
+Cenário: disponibilização do arquivo
+Given: a geração do PDF foi concluída com sucesso
+When: o processamento for finalizado
+Then: o sistema disponibiliza o arquivo gerado ao usuário
+```
 ---
 
 ## 5. Implementação no código
