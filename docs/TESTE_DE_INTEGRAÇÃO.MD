@@ -31,8 +31,6 @@ Por isso, ao planejar um teste de integração, a primeira pergunta é sempre: *
 
 BDD é uma forma de descrever o comportamento esperado de um sistema através de **exemplos concretos e observáveis externamente**, em vez de descrever como o código foi implementado por dentro.
 
-A ideia central: qualquer pessoa do time — dev, QA, PO — deve conseguir ler um cenário e entender exatamente o que o sistema deve fazer, sem precisar abrir o código-fonte.
-
 O formato padrão para descrever esses exemplos é **Given / When / Then** (e o complemento `And`):
 
 - **Given** — o estado do mundo antes da ação (quais dados existem, em que condição).
